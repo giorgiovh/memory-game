@@ -1,0 +1,12 @@
+.board {
+    display: grid;
+    grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
+}
+
+.title {
+    text-align: center;
+}
+
+.card {
+    border: 2px solid black;
+}
