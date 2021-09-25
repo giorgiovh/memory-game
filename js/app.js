@@ -12,4 +12,10 @@ const cardsNodeList = document.querySelectorAll('.card');
 
 /*----- event listeners -----*/ 
 
+boardEl.addEventListener('click', handleClick)
+
 /*----- functions -----*/
+
+function handleClick(event) {
+    console.log(event.target);
+}
