@@ -2,7 +2,7 @@
 
 /*----- app's state (variables) -----*/ 
 
-let board = [], winStatus;
+let winStatus;
 let matchingPairsArr = [[0, 10], [10, 0], [1, 4], [4, 1], [2, 11], [11, 2], [3, 6], [6, 3], [5, 8], [8, 5], [7, 9], [9, 7]];
 let tempArr = []; //will contain each of the clicked elements id (which is their index)
 
@@ -24,7 +24,6 @@ init()
 
 function init() {
     messageEl.innerText = 'Make a move!'
-    board = [null, null, null, null, null, null, null, null, null, null, null, null];
     winStatus = null;
     render();
 }
@@ -33,13 +32,23 @@ function init() {
 
 function handleClick(event) {
     let clickedEl = event.target;
-    let clickedElId = clickedEl.id;
-    // board[clickedElId] = 1;
+    let clickedElId = parseInt(clickedEl.id);
     tempArr.push(clickedElId);
     console.log(tempArr);
+    if (tempArr.length === 2) {
+        checkForMatchingPair(tempArr);
+    }
     setWinStatus();
-    // console.log(board);
     render();
+}
+
+/*----- functions -----*/
+
+function checkForMatchingPair(tempArr) {
+    let isAMatch = matchingPairsArr.some(function(matchingPair) {
+        return matchingPair === tempArr;
+    })
+    console.log(isAMatch);
 }
 
 /*----- check winner function -----*/
@@ -49,16 +58,8 @@ function setWinStatus() {
 }
 /*----- render function -----*/
 
+// ****CONTINUE HERE****
 function render() {
-    // board.forEach(function(card, i) {
-    //     if (card === null) {
-    //         frontSidesNodeList[i].setAttribute('hidden', true);
-    //     } else if (card === 1) {
-    //         backSidesNodeList[i].setAttribute('hidden', true);
-    //         frontSidesNodeList[i].removeAttribute('hidden')
-    //     }
-    // })
-
     tempArr.forEach(function(clickedElId) {
         backSidesNodeList[clickedElId].setAttribute('hidden', true);
         frontSidesNodeList[clickedElId].removeAttribute('hidden');
