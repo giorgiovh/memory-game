@@ -1,6 +1,9 @@
 .board {
     display: grid;
     grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
+    margin: auto;
+    grid-gap: 25px;
+    text-align: center;
 }
 
 .title, #message {
@@ -9,4 +12,9 @@
 
 .card {
     border: 2px solid black;
+}
+
+img {
+    width: 50px;
+    height: 100px;
 }
