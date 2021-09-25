@@ -3,7 +3,7 @@
     grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
 }
 
-.title {
+.title, #message {
     text-align: center;
 }
 
