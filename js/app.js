@@ -9,7 +9,10 @@ let board = [], winner;
 const messageEl = document.querySelector('#message');
 const boardEl = document.querySelector('.board');
 const cardsNodeList = document.querySelectorAll('.card');
+const frontSideEls = document.querySelectorAll('.front-side');
+const backSideEls = document.querySelectorAll('.back-side');
 
+console.log(backSideEls);
 /*----- event listeners -----*/ 
 
 boardEl.addEventListener('click', handleClick)
@@ -34,5 +37,8 @@ function render() {
 }
 
 function handleClick(event) {
-    console.log(event.target);
+    let clickedEl = event.target;
+    let clickedElId = clickedEl.id
+    backSideEls[clickedElId].setAttribute('hidden', true);
+    frontSideEls[clickedElId].removeAttribute('hidden');
 }
