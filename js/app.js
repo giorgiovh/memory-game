@@ -4,7 +4,7 @@
 
 let board = [], winStatus;
 let matchingPairsArr = [[0, 10], [10, 0], [1, 4], [4, 1], [2, 11], [11, 2], [3, 6], [6, 3], [5, 8], [8, 5], [7, 9], [9, 7]];
-let tempArr = [];
+let tempArr = []; //will contain each of the clicked elements id (which is their index)
 
 /*----- cached element references -----*/ 
 
@@ -34,9 +34,11 @@ function init() {
 function handleClick(event) {
     let clickedEl = event.target;
     let clickedElId = clickedEl.id;
-    board[clickedElId] = 1;
+    // board[clickedElId] = 1;
+    tempArr.push(clickedElId);
+    console.log(tempArr);
     setWinStatus();
-    console.log(board);
+    // console.log(board);
     render();
 }
 
@@ -48,13 +50,18 @@ function setWinStatus() {
 /*----- render function -----*/
 
 function render() {
-    board.forEach(function(card, i) {
-        if (card === null) {
-            frontSidesNodeList[i].setAttribute('hidden', true);
-        } else if (card === 1) {
-            backSidesNodeList[i].setAttribute('hidden', true);
-            frontSidesNodeList[i].removeAttribute('hidden')
-        }
+    // board.forEach(function(card, i) {
+    //     if (card === null) {
+    //         frontSidesNodeList[i].setAttribute('hidden', true);
+    //     } else if (card === 1) {
+    //         backSidesNodeList[i].setAttribute('hidden', true);
+    //         frontSidesNodeList[i].removeAttribute('hidden')
+    //     }
+    // })
+
+    tempArr.forEach(function(clickedElId) {
+        backSidesNodeList[clickedElId].setAttribute('hidden', true);
+        frontSidesNodeList[clickedElId].removeAttribute('hidden');
     })
 }
 
