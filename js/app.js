@@ -34,13 +34,16 @@ function handleClick(event) {
     let clickedEl = event.target;
     let clickedElId = parseInt(clickedEl.id);
     tempArr.push(clickedElId);
-    console.log(tempArr);
+    console.log('temp array', tempArr);
     console.log('temp array length', tempArr.length);
     if (tempArr.length === 2) {
-       console.log(checkForMatchingPair());
+       checkForMatchingPair();
     }
     setWinStatus();
     render();
+    if (tempArr.length === 2) {
+        tempArr = []
+    }
 }
 
 /*----- functions -----*/
@@ -59,11 +62,15 @@ function setWinStatus() {
 }
 /*----- render function -----*/
 
-// ****CONTINUE HERE****
 function render() {
+    showClickedElsFrontSides();
+}
+
+function showClickedElsFrontSides() {
     tempArr.forEach(function(clickedElId) {
         backSidesNodeList[clickedElId].setAttribute('hidden', true);
         frontSidesNodeList[clickedElId].removeAttribute('hidden');
     })
 }
+
 
