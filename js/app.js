@@ -35,8 +35,9 @@ function handleClick(event) {
     let clickedElId = parseInt(clickedEl.id);
     tempArr.push(clickedElId);
     console.log(tempArr);
+    console.log('temp array length', tempArr.length);
     if (tempArr.length === 2) {
-        checkForMatchingPair(tempArr);
+       console.log(checkForMatchingPair());
     }
     setWinStatus();
     render();
@@ -44,11 +45,11 @@ function handleClick(event) {
 
 /*----- functions -----*/
 
-function checkForMatchingPair(tempArr) {
-    let isAMatch = matchingPairsArr.some(function(matchingPair) {
-        return matchingPair === tempArr;
+function checkForMatchingPair() {
+    isAMatchingPair = matchingPairsArr.some(function(matchingPair) {
+        return matchingPair.toString() === tempArr.toString();
     })
-    console.log(isAMatch);
+    return isAMatchingPair;
 }
 
 /*----- check winner function -----*/
