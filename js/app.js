@@ -3,7 +3,7 @@
 /*----- app's state (variables) -----*/ 
 
 let winStatus;
-let matchingPairsArr = [[0, 10], [10, 0], [1, 4], [4, 1], [2, 11], [11, 2], [3, 6], [6, 3], [5, 8], [8, 5], [7, 9], [9, 7]];
+let matchingPairsArr = [[0, 10], [1, 4], [2, 11], [3, 6], [5, 8], [7, 9]];
 let tempArr = []; //will contain each of the clicked elements id (which is their index)
 
 /*----- cached element references -----*/ 
@@ -37,10 +37,11 @@ function handleClick(event) {
     console.log('temp array', tempArr);
     console.log('temp array length', tempArr.length);
     if (tempArr.length === 2) {
-       checkForMatchingPair();
+       console.log(checkForMatchingPair());
     }
     setWinStatus();
     render();
+    //***CONTINUE HERE***/
     if (tempArr.length === 2) {
         tempArr = []
     }
@@ -49,8 +50,8 @@ function handleClick(event) {
 /*----- functions -----*/
 
 function checkForMatchingPair() {
-    isAMatchingPair = matchingPairsArr.some(function(matchingPair) {
-        return matchingPair.toString() === tempArr.toString();
+    const isAMatchingPair = matchingPairsArr.some(function(matchingPair) {
+        return matchingPair.toString() === tempArr.toString() || matchingPair.reverse().toString() === tempArr.toString();
     })
     return isAMatchingPair;
 }
