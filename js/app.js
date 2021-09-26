@@ -4,15 +4,13 @@
 
 let winStatus;
 let matchingPairsArr = [[0, 10], [1, 4], [2, 11], [3, 6], [5, 8], [7, 9]];
-let tempArr = []; //will contain each of the clicked elements id (which is their index)
+let selectedEls = []; //will contain each of the clicked elements id (which is their index)
 
 /*----- cached element references -----*/ 
 
 const messageEl = document.querySelector('#message');
 const boardEl = document.querySelector('.board');
 const cardsNodeList = document.querySelectorAll('.card');
-const frontSidesNodeList = document.querySelectorAll('.front-side');
-const backSidesNodeList = document.querySelectorAll('.back-side');
 
 /*----- event listeners -----*/ 
 
@@ -32,27 +30,31 @@ function init() {
 
 function handleClick(event) {
     let clickedEl = event.target;
-    let clickedElId = parseInt(clickedEl.id);
-    tempArr.push(clickedElId);
-    console.log('temp array', tempArr);
-    console.log('temp array length', tempArr.length);
-    if (tempArr.length === 2) {
+    // let clickedElId = parseInt(clickedEl.id);
+    selectedEls.push(clickedEl);
+    console.log('temp array', selectedEls);
+    console.log('temp array length', selectedEls.length);
+    if (selectedEls.length === 2) {
        console.log(checkForMatchingPair());
     }
     setWinStatus();
     render();
     //***CONTINUE HERE***/
-    if (tempArr.length === 2) {
-        tempArr = []
+    if (selectedEls.length === 2) {
+        selectedEls = []
     }
 }
 
 /*----- functions -----*/
 
 function checkForMatchingPair() {
-    const isAMatchingPair = matchingPairsArr.some(function(matchingPair) {
-        return matchingPair.toString() === tempArr.toString() || matchingPair.reverse().toString() === tempArr.toString();
+    const selectedIds = selectedEls.map(function(selectedEl) {
+        return parseInt(selectedEl.id);
     })
+    const isAMatchingPair = matchingPairsArr.some(function(matchingPair) {
+        return matchingPair.toString() === selectedIds.toString() || matchingPair.reverse().toString() === selectedIds.toString();
+    })
+
     return isAMatchingPair;
 }
 
@@ -68,9 +70,9 @@ function render() {
 }
 
 function showClickedElsFrontSides() {
-    tempArr.forEach(function(clickedElId) {
-        backSidesNodeList[clickedElId].setAttribute('hidden', true);
-        frontSidesNodeList[clickedElId].removeAttribute('hidden');
+    selectedEls.forEach(function(clickedEl) {
+        clickedEl.querySelector('.back-side').setAttribute('hidden', true);
+        clickedEl.querySelector('.front-side').removeAttribute('hidden');
     })
 }
 
