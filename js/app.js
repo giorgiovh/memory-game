@@ -14,7 +14,9 @@ const cardsNodeList = document.querySelectorAll('.card');
 
 /*----- event listeners -----*/ 
 
-boardEl.addEventListener('click', handleClick)
+cardsNodeList.forEach(function(card) {
+    card.addEventListener('click', handleClick);
+})
 
 /*----- init function -----*/
 
