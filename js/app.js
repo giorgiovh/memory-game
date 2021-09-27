@@ -45,7 +45,10 @@ function handleClick(event) {
                 selectedEls = [];
             }, 1500);
         } else {
-            showClickedElsBackSides();
+            setTimeout(function() {
+                showClickedElsBackSides();
+                selectedEls = [];
+            }, 1500);
         }
     }
 
@@ -83,10 +86,15 @@ function showClickedElsFrontSides() {
 function vanish() {
     console.log('vanish');
     selectedEls.forEach(function(selectedEl) {
+        selectedEl.querySelector('.back-side').setAttribute('hidden', true);
         selectedEl.querySelector('.front-side').setAttribute('hidden', true);
     })
 }
 
 function showClickedElsBackSides() {
     console.log('show back side');
+    selectedEls.forEach(function(selectedEl) {
+        selectedEl.querySelector('.back-side').removeAttribute('hidden');
+        selectedEl.querySelector('.front-side').setAttribute('hidden', true)
+    })
 }
