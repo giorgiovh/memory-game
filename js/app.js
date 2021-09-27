@@ -44,6 +44,7 @@ function handleClick(event) {
         if (checkForMatchingPair()) {
             setTimeout(function() {
                 vanish();
+                removeEventListeners();
                 selectedEls = [];
             }, 1500);
         } else {
@@ -97,6 +98,12 @@ function showClickedElsBackSides() {
     console.log('show back side');
     selectedEls.forEach(function(selectedEl) {
         selectedEl.querySelector('.back-side').removeAttribute('hidden');
-        selectedEl.querySelector('.front-side').setAttribute('hidden', true)
+        selectedEl.querySelector('.front-side').setAttribute('hidden', true);
+    })
+}
+
+function removeEventListeners() {
+    selectedEls.forEach(function(selectedEl) {
+        selectedEl.removeEventListener('click', handleClick);
     })
 }
