@@ -12,8 +12,7 @@ let matchingPairsArr = [
     [7, 9]
 ];
 let selectedEls = []; //will contain each of the clicked elements id (which is their index)
-let matchedPairsCount = 0;
-let turnsCount = 0;
+let matchedPairsCount, tunrsUsed, turnsAllowed, turnsLeft;
 
 /*----- cached element references -----*/
 
@@ -33,8 +32,12 @@ cardsNodeList.forEach(function (card) {
 init()
 
 function init() {
-    messageEl.innerText = 'Make a move!'
     winStatus = null;
+    matchedPairsCount = 0;
+    tunrsUsed = 0;
+    turnsAllowed = 12;
+    turnsLeft = turnsAllowed;
+    renderMessage();
 }
 
 /*----- on-click function -----*/
@@ -71,8 +74,9 @@ function handleClick(event) {
                 selectedEls = [];
             }, 1500);
         }
-        turnsCount++;
-        console.log('turns count', turnsCount);
+        tunrsUsed++;
+        turnsLeft--;
+        console.log('turns count', tunrsUsed);
     }
 
     setWinStatus();
@@ -96,7 +100,7 @@ function checkForMatchingPair() {
 /*----- check winner function -----*/
 
 function setWinStatus() {
-    if (turnsCount === 12) {
+    if (tunrsUsed === turnsAllowed) {
         winStatus = 'L';
     } else if (matchedPairsCount === 6) {
         winStatus = 'W';
@@ -134,6 +138,11 @@ function removeEventListeners() {
 }
 
 function renderMessage() {
+    if (turnsLeft > 1) {
+        messageEl.innerText = `You have ${turnsLeft} turns left. Make a move!`;
+    } else if (turnsLeft === 1) {
+        messageEl.innerText = `You have ${turnsLeft} turn left. Make a move!`
+    }
     if (winStatus === 'L') {
         messageEl.innerText = `You lose`
     } else if (winStatus === 'W') {
