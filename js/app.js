@@ -23,26 +23,34 @@ init()
 function init() {
     messageEl.innerText = 'Make a move!'
     winStatus = null;
-    render();
 }
 
 /*----- on-click function -----*/
 
 function handleClick(event) {
     let clickedEl = event.target;
-    // let clickedElId = parseInt(clickedEl.id);
     selectedEls.push(clickedEl);
-    console.log('temp array', selectedEls);
-    console.log('temp array length', selectedEls.length);
+
+    console.log('selected Els', selectedEls);
+    console.log('selected Els length', selectedEls.length);
+
+    showClickedElsFrontSides();
+    
+   
     if (selectedEls.length === 2) {
-       console.log(checkForMatchingPair());
+        console.log(checkForMatchingPair());
+        if (checkForMatchingPair()) {
+            setTimeout(function() {
+                vanish();
+                selectedEls = [];
+            }, 1500);
+        } else {
+            showClickedElsBackSides();
+        }
     }
+
     setWinStatus();
-    render();
-    //***CONTINUE HERE***/
-    if (selectedEls.length === 2) {
-        selectedEls = []
-    }
+
 }
 
 /*----- functions -----*/
@@ -65,15 +73,20 @@ function setWinStatus() {
 }
 /*----- render function -----*/
 
-function render() {
-    showClickedElsFrontSides();
-}
-
 function showClickedElsFrontSides() {
-    selectedEls.forEach(function(clickedEl) {
-        clickedEl.querySelector('.back-side').setAttribute('hidden', true);
-        clickedEl.querySelector('.front-side').removeAttribute('hidden');
+    selectedEls.forEach(function(selectedEl) {
+        selectedEl.querySelector('.back-side').setAttribute('hidden', true);
+        selectedEl.querySelector('.front-side').removeAttribute('hidden');
     })
 }
 
+function vanish() {
+    console.log('vanish');
+    selectedEls.forEach(function(selectedEl) {
+        selectedEl.querySelector('.front-side').setAttribute('hidden', true);
+    })
+}
 
+function showClickedElsBackSides() {
+    console.log('show back side');
+}
