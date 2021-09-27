@@ -39,14 +39,20 @@ function init() {
 /*----- on-click function -----*/
 
 function handleClick(event) {
-    let clickedEl = event.currentTarget; // currentTarget is the element that the event listener is tied to (card El), not necessarily what you clicked on (the image itself)
+    // currentTarget is the element that the event listener is tied to (card El), not necessarily what you clicked on (the image itself)
+    let clickedEl = event.currentTarget; 
+
+    // if user clicks on the same element twice, it won't run the rest of the logic
+    if (selectedEls.includes(clickedEl)) {
+        return;
+    } 
+    
     selectedEls.push(clickedEl);
 
     console.log('selected Els', selectedEls);
     console.log('selected Els length', selectedEls.length);
 
     showClickedElsFrontSides();
-
 
     if (selectedEls.length === 2) {
         console.log(checkForMatchingPair());
