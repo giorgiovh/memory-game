@@ -12,12 +12,14 @@ let matchingPairsArr = [
     [7, 9]
 ];
 let selectedEls = []; //will contain each of the clicked elements id (which is their index)
+let matchedPairsCount = 0;
 
 /*----- cached element references -----*/
 
 const messageEl = document.querySelector('#message');
 const boardEl = document.querySelector('.board');
 const cardsNodeList = document.querySelectorAll('.card');
+
 
 /*----- event listeners -----*/
 
@@ -54,6 +56,8 @@ function handleClick(event) {
                 removeEventListeners();
                 selectedEls = [];
             }, 1500);
+            matchedPairsCount++;
+            console.log(matchedPairsCount);
         } else {
             setTimeout(function () {
                 showClickedElsBackSides();
@@ -82,8 +86,12 @@ function checkForMatchingPair() {
 /*----- check winner function -----*/
 
 function setWinStatus() {
-
+    if (matchedPairsCount === 6) {
+        winStatus = 'W';
+        renderMessage();
+    }
 }
+
 /*----- render function -----*/
 
 function showClickedElsFrontSides() {
@@ -113,4 +121,10 @@ function removeEventListeners() {
     selectedEls.forEach(function (selectedEl) {
         selectedEl.removeEventListener('click', handleClick);
     })
+}
+
+function renderMessage() {
+    if (winStatus === 'W') {
+        messageEl.innerText = "You win!";
+    }
 }
