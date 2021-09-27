@@ -13,6 +13,7 @@ let matchingPairsArr = [
 ];
 let selectedEls = []; //will contain each of the clicked elements id (which is their index)
 let matchedPairsCount = 0;
+let turnsCount = 0;
 
 /*----- cached element references -----*/
 
@@ -70,9 +71,12 @@ function handleClick(event) {
                 selectedEls = [];
             }, 1500);
         }
+        turnsCount++;
+        console.log('turns count', turnsCount);
     }
 
     setWinStatus();
+    renderMessage();
 
 }
 
@@ -92,9 +96,10 @@ function checkForMatchingPair() {
 /*----- check winner function -----*/
 
 function setWinStatus() {
-    if (matchedPairsCount === 6) {
+    if (turnsCount === 12) {
+        winStatus = 'L';
+    } else if (matchedPairsCount === 6) {
         winStatus = 'W';
-        renderMessage();
     }
 }
 
@@ -116,7 +121,6 @@ function vanish() {
 }
 
 function showClickedElsBackSides() {
-    console.log('show back side');
     selectedEls.forEach(function (selectedEl) {
         selectedEl.querySelector('.back-side').removeAttribute('hidden');
         selectedEl.querySelector('.front-side').setAttribute('hidden', true);
@@ -130,7 +134,9 @@ function removeEventListeners() {
 }
 
 function renderMessage() {
-    if (winStatus === 'W') {
+    if (winStatus === 'L') {
+        messageEl.innerText = `You lose`
+    } else if (winStatus === 'W') {
         messageEl.innerText = "You win!";
     }
 }
