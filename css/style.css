@@ -2,7 +2,7 @@
     display: grid;
     grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
     margin: auto;
-    grid-gap: 25px;
+    grid-gap: 10px;
     text-align: center;
 }
 
@@ -10,11 +10,13 @@
     text-align: center;
 }
 
-.card {
-    border: 2px solid black;
+img {
+    width: 100px;
+    height: 150px;
 }
 
-img {
-    width: 50px;
-    height: 100px;
+.parent-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
 }
