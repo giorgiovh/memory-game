@@ -35,6 +35,7 @@ resetBtn.addEventListener('click', init)
 init()
 
 function init() {
+    clickedEls = [];
     winStatus = null;
     matchedPairsCount = 0;
     turnsAllowed = 12;

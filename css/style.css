@@ -23,6 +23,7 @@
 img {
     width: 15vh;
     height: 20vh;
+    border-radius: 20px;
 }
 
 .parent-button-container {
@@ -45,6 +46,9 @@ img {
     width: 9vh;
     height: 3vh;
     font-size: 2vh;
+    color: chocolate;
+    background-color: white;
+    border-radius: 10px;
 }
 
 body {
