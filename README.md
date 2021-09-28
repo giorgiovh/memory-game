@@ -8,6 +8,8 @@ Instructions: Click two cards at a time. If your clicked cards match, they disap
 
 ![](images/game-screenshot.png)
 
+Technologies used: HTML, CSS, and Javascript.
+
 
 
 
