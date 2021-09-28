@@ -160,6 +160,7 @@ function renderMessage() {
 function renderStartingCards() {
     cardsNodeList.forEach(function(cardNode) {
         cardNode.querySelector('.back-side').removeAttribute('hidden');
+        cardNode.querySelector('.front-side').setAttribute('hidden', true);
     })
 }
 

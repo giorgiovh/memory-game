@@ -9,11 +9,20 @@
 
 .title, #message {
     text-align: center;
+    color: white;
+}
+
+.title {
+    font-size: 4.5vh;
+}
+
+#message {
+    font-size: 3vh;
 }
 
 img {
-    width: 100px;
-    height: 150px;
+    width: 15vh;
+    height: 20vh;
 }
 
 .parent-button-container {
@@ -22,12 +31,23 @@ img {
     margin: 50px auto;
 }
 
-.hover {
+.card {
     transition: .3s ease;
 }
 
-.hover:hover {
+.card:hover {
     transform: scale(1.3);
     -webkit-transform: scale(1.3);
     -ms-transform: scale(1.3);
+}
+
+#reset-btn {
+    width: 9vh;
+    height: 3vh;
+    font-size: 2vh;
+}
+
+body {
+    font-family: 'PT Sans Caption', sans-serif;
+    background-color: chocolate;
 }
