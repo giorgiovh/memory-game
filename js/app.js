@@ -52,9 +52,7 @@ function handleClick(event) {
     let clickedEl = event.currentTarget; 
 
     // if user clicks on the same element twice, it won't run the rest of the logic
-    if (clickedEls.includes(clickedEl)) {
-        return;
-    } 
+    if (clickedEls.includes(clickedEl)) return;
     
     clickedEls.push(clickedEl);
 
@@ -64,7 +62,7 @@ function handleClick(event) {
         if (checkForMatchingPair()) {
             setTimeout(function () {
                 vanish();
-                removeEventListeners();
+                removeClickedElsEventListeners();
                 clickedEls = [];
             }, 1500);
             matchedPairsCount++;
@@ -75,15 +73,15 @@ function handleClick(event) {
             }, 1500);
         }
         turnsUsed++;
-        if (turnsUsed === 1) {
-            resetBtn.removeAttribute('hidden');
-        }
         turnsLeft--;
     }
 
     setWinStatus();
     renderMessage();
 
+    if (winStatus === 'L') {
+        removeAllEventListeners();
+    }
 }
 
 /*----- functions -----*/
@@ -109,7 +107,7 @@ function setWinStatus() {
     }
 }
 
-/*----- render function -----*/
+/*----- render functions -----*/
 
 function showFrontSides() {
     clickedEls.forEach(function (selectedEl) {
@@ -132,9 +130,15 @@ function showBackSides() {
     })
 }
 
-function removeEventListeners() {
+function removeClickedElsEventListeners() {
     clickedEls.forEach(function (selectedEl) {
         selectedEl.removeEventListener('click', handleClick);
+    })
+}
+
+function removeAllEventListeners() {
+    cardsNodeList.forEach(function(cardNode) {
+        cardNode.removeEventListener('click', handleClick);
     })
 }
 
@@ -146,7 +150,7 @@ function renderMessage() {
     }
 
     if (winStatus === 'L') {
-        messageEl.innerText = `You lose`
+        messageEl.innerText = `You lose`;
     } else if (winStatus === 'W') {
         messageEl.innerText = "You win!";
     }
