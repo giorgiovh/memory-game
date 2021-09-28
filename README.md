@@ -10,6 +10,9 @@ Instructions: Click two cards at a time. If your clicked cards match, they disap
 
 Technologies used: HTML, CSS, and Javascript.
 
+Next steps: Randomize the positioning of the cards and add different difficulty levels.
+
+
 
 
 
