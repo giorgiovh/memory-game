@@ -20,13 +20,12 @@ const containerEl = document.querySelector('.container');
 const cardEls = document.querySelectorAll('.card');
 
 
-
-
 /*----- event listeners -----*/
 
 cardEls.forEach(function(cardEl) {
     cardEl.addEventListener('click', handleClick);
 })
+
 
 /*----- init function -----*/
 
@@ -42,13 +41,12 @@ function init() {
     renderMessage();
 }
 
+
 /*----- functions -----*/
 
 function handleClick(event) {
     
     let clickedEl = event.currentTarget; // currentTarget is the element that the event listener is tied to (card El), not necessarily what you clicked on (the image itself)
-
-    console.log(clickedEl);
 
     if (clickedEls.includes(clickedEl)) return; // if user clicks on the same element twice, it won't run the rest of the logic
 
@@ -67,30 +65,35 @@ function handleClick(event) {
         } else {
             setTimeout(function () {
                 clickedEls.forEach(function(clickedEl) {
-                    clickedEl.querySelector('.front').style.backfaceVisibility = 'visible'
-                    clickedEl.querySelector('.front').classList.add('animate__animated')
-                    clickedEl.querySelector('.front').classList.add('animate__shakeX')
+                    clickedEl.querySelector('.front').style.backfaceVisibility = 'visible';
+
+                    addsShakeClasses(clickedEl);
                 })
-                // showBackSides();
-            }, 2500);
+            }, 1500);
             setTimeout(function () {
-                clickedEls.forEach(function(div) {
-                    div.querySelector('.front').style.backfaceVisibility = 'hidden';
+                clickedEls.forEach(function(clickedEl) {
+                    clickedEl.querySelector('.front').style.backfaceVisibility = 'hidden';
                     
-                    div.classList.remove('flipped');
+                    clickedEl.classList.remove('flipped');
                     
-                    div.querySelector('.front').classList.remove('animate__animated');
-                    
-                    div.querySelector('.front').classList.remove('animate__shakeX');
+                    removesShakeClasses(clickedEl);
                 })
                 clickedEls = [];
-            }, 4500);
+            }, 2500);
         }
         turnsUsed++;
         turnsLeft--;
     }
-}
 
+    setWinStatus();
+    renderMessage();
+
+    if (winStatus === 'L') {
+        cardEls.forEach(function(card) {
+            card.classList.add('disabled')
+        })
+    }
+}
 
 
 function checkForMatchingPair() {
@@ -100,7 +103,7 @@ function checkForMatchingPair() {
     const isMatchingPair = matchingPairsArr.some(function (matchingPair) {
         return matchingPair.toString() === selectedIds.toString() || matchingPair.reverse().toString() === selectedIds.toString();
     })
-
+    
     return isMatchingPair;
 }
 
@@ -108,6 +111,16 @@ function removePointerEvents() {
     clickedEls.forEach(function (clickedEl) {
         clickedEl.classList.add('disabled');
     });
+}
+
+/*----- check winner function -----*/
+
+function setWinStatus() {
+    if (turnsUsed === turnsAllowed) {
+        winStatus = 'L';
+    } else if (matchedPairsCount === 6) {
+        winStatus = 'W';
+    }
 }
 
 
@@ -124,7 +137,7 @@ function renderMessage() {
     } else if (turnsLeft === 1) {
         messageEl.innerText = `You have ${turnsLeft} turn left. Make a move!`
     }
-
+    
     if (winStatus === 'L') {
         messageEl.innerText = `You lose`;
     } else if (winStatus === 'W') {
@@ -139,3 +152,14 @@ function vanish() {
     })
 }
 
+function removesShakeClasses(clickedEl) {
+    clickedEl.querySelector('.front').classList.remove('animate__animated');
+
+    clickedEl.querySelector('.front').classList.remove('animate__shakeX');
+}
+
+function addsShakeClasses(clickedEl) {
+    clickedEl.querySelector('.front').classList.add('animate__animated');
+
+    clickedEl.querySelector('.front').classList.add('animate__shakeX');
+}
