@@ -120,7 +120,7 @@ function removePointerEvents() {
 /*----- check winner function -----*/
 
 function setWinStatus() {
-    if (turnsUsed === turnsAllowed) {
+    if (turnsUsed > turnsAllowed) {
         winStatus = 'L';
     } else if (matchedPairsCount === 6) {
         winStatus = 'W';
@@ -145,7 +145,7 @@ function renderMessage() {
     if (winStatus === 'L') {
         messageEl.innerText = `You lose`;
     } else if (winStatus === 'W') {
-        messageEl.innerText = "You win!";
+        messageEl.innerText = `Congrats! You've won in ${turnsUsed} turns`;
     }
 }
 
