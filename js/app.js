@@ -18,7 +18,7 @@ let winStatus, matchedPairsCount, turnsAllowed, turnsUsed, turnsLeft;
 const messageEl = document.querySelector('#message');
 const containerEl = document.querySelector('.container');
 const cardEls = document.querySelectorAll('.card');
-
+const resetBtn = document.querySelector('#reset-btn');
 
 /*----- event listeners -----*/
 
@@ -26,6 +26,7 @@ cardEls.forEach(function(cardEl) {
     cardEl.addEventListener('click', handleClick);
 })
 
+resetBtn.addEventListener('click', init);
 
 /*----- init function -----*/
 
@@ -39,6 +40,7 @@ function init() {
     turnsUsed = 0;
     turnsLeft = turnsAllowed;
     renderMessage();
+    renderStartingCards();
 }
 
 
@@ -163,3 +165,12 @@ function addsShakeClasses(clickedEl) {
 
     clickedEl.querySelector('.front').classList.add('animate__shakeX');
 }
+
+// for when reset btn is clicked
+function renderStartingCards() {
+    cardEls.forEach(function(cardEl) {
+        cardEl.querySelector('.back').removeAttribute('hidden');
+        cardEl.querySelector('.front').removeAttribute('hidden');
+    }) 
+}
+
