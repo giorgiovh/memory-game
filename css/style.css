@@ -10,8 +10,13 @@ header {
 
 .board {
     height: 100vh;
-    display: flex;
 }
+
+.container {
+    display: grid;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
+    perspective: 1000px;
+} /* f */
 
 .card {
     height: 150px;
@@ -24,9 +29,6 @@ header {
 .front, .back {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 10px;
     position: absolute; /* f */
 }
@@ -46,8 +48,4 @@ header {
 
 .card.flipped {
     transform: rotateY(180deg);
-} /* f */
-
-.container {
-    perspective: 1000px;
 } /* f */
