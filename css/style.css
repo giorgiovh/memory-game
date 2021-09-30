@@ -17,7 +17,7 @@ header {
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
     min-height: 65vh;
-    perspective: 1000px; /* f */
+    perspective: 1000px;
 }
 
 .title, #message {
@@ -29,9 +29,8 @@ header {
     height: 150px;
     width: 90px;
     position: relative;
-    transform-style: preserve-3d; /* f */
+    transform-style: preserve-3d;
     transition: all .25s linear;
-    /* transition: .2s ease; */ /* need to make this the transition for just the expand on hover */
     margin: auto;
 }
 
@@ -46,25 +45,25 @@ header {
     height: 100%;
     border-radius: 10px;
     box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
-    position: absolute; /* f */
+    position: absolute;
 }
 
 .back {
     background: linear-gradient(#08aeea, #2af598);
-    z-index: 2; /* f */
-    backface-visibility: hidden; /* f */
+    z-index: 2;
+    backface-visibility: hidden;
 }
 
 .front {
     background: linear-gradient(#f8da61, #ff5acd);
-    z-index: 1; /* f */
-    transform: rotateY(180deg); /* f */
-    backface-visibility: hidden; /* f */
+    z-index: 1;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
 }
 
 .card.flipped {
     transform: rotateY(180deg);
-} /* f */
+}
 
 .card.disabled {
     pointer-events: none;

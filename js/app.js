@@ -54,40 +54,44 @@ function handleClick(event) {
 
     clickedEls.push(clickedEl);
 
+    renderCardFlip(event);
+
     if (clickedEls.length === 2) {
         if (checkForMatchingPair()) {
             setTimeout(function () {
-                // vanish();
-                clickedEl.classList.add('disabled');
+                vanish();
+                removePointerEvents();
                 clickedEls = [];
             }, 1500);
             matchedPairsCount++;
         } else {
             setTimeout(function () {
-                clickedEls.forEach(function(div) {
-                    div.querySelector('.front').style.backfaceVisibility = 'visible'
-                    div.querySelector('.front').classList.add('animate__animated')
-                    div.querySelector('.front').classList.add('animate__shakeX')
+                clickedEls.forEach(function(clickedEl) {
+                    clickedEl.querySelector('.front').style.backfaceVisibility = 'visible'
+                    clickedEl.querySelector('.front').classList.add('animate__animated')
+                    clickedEl.querySelector('.front').classList.add('animate__shakeX')
                 })
                 // showBackSides();
             }, 2500);
             setTimeout(function () {
                 clickedEls.forEach(function(div) {
-                    div.querySelector('.front').style.backfaceVisibility = 'hidden'
+                    div.querySelector('.front').style.backfaceVisibility = 'hidden';
+                    
                     div.classList.remove('flipped');
+                    
                     div.querySelector('.front').classList.remove('animate__animated');
+                    
                     div.querySelector('.front').classList.remove('animate__shakeX');
                 })
-                // showBackSides();add
                 clickedEls = [];
             }, 4500);
         }
         turnsUsed++;
         turnsLeft--;
     }
-
-    renderCardFlip(event);
 }
+
+
 
 function checkForMatchingPair() {
     const selectedIds = clickedEls.map(function (selectedEl) {
@@ -100,6 +104,11 @@ function checkForMatchingPair() {
     return isMatchingPair;
 }
 
+function removePointerEvents() {
+    clickedEls.forEach(function (clickedEl) {
+        clickedEl.classList.add('disabled');
+    });
+}
 
 
 /*----- render functions -----*/
@@ -124,6 +133,9 @@ function renderMessage() {
 }
 
 function vanish() {
-    
+    clickedEls.forEach(function(clickedEl) {
+        clickedEl.querySelector('.back').setAttribute('hidden', true);
+        clickedEl.querySelector('.front').setAttribute('hidden', true);
+    })
 }
 
