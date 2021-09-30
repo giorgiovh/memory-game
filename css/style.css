@@ -72,7 +72,7 @@ header {
 .reset-btn-container {
     display: flex;
     justify-content: center;
-    margin: 10px auto;
+    /* margin: 10px auto; */
 }
 
 #reset-btn {
