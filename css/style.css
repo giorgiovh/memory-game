@@ -30,7 +30,7 @@ header {
     width: 90px;
     position: relative;
     transform-style: preserve-3d; /* f */
-    transition: all 1s linear; /* f */ /* need to make this the transition for just the card flip */
+    transition: all .25s linear;
     /* transition: .2s ease; */ /* need to make this the transition for just the expand on hover */
     margin: auto;
 }
