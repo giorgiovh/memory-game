@@ -65,3 +65,7 @@ header {
 .card.flipped {
     transform: rotateY(180deg);
 } /* f */
+
+.card.disabled {
+    pointer-events: none;
+}

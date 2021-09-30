@@ -19,7 +19,7 @@ const messageEl = document.querySelector('#message');
 const containerEl = document.querySelector('.container');
 const cardEls = document.querySelectorAll('.card');
 
-console.log(messageEl);
+
 
 
 /*----- event listeners -----*/
@@ -45,13 +45,66 @@ function init() {
 /*----- functions -----*/
 
 function handleClick(event) {
-    flipCard(event)
+    
+    let clickedEl = event.currentTarget; // currentTarget is the element that the event listener is tied to (card El), not necessarily what you clicked on (the image itself)
+
+    console.log(clickedEl);
+
+    if (clickedEls.includes(clickedEl)) return; // if user clicks on the same element twice, it won't run the rest of the logic
+
+    clickedEls.push(clickedEl);
+
+    if (clickedEls.length === 2) {
+        if (checkForMatchingPair()) {
+            setTimeout(function () {
+                // vanish();
+                clickedEl.classList.add('disabled');
+                clickedEls = [];
+            }, 1500);
+            matchedPairsCount++;
+        } else {
+            setTimeout(function () {
+                clickedEls.forEach(function(div) {
+                    div.querySelector('.front').style.backfaceVisibility = 'visible'
+                    div.querySelector('.front').classList.add('animate__animated')
+                    div.querySelector('.front').classList.add('animate__shakeX')
+                })
+                // showBackSides();
+            }, 2500);
+            setTimeout(function () {
+                clickedEls.forEach(function(div) {
+                    div.querySelector('.front').style.backfaceVisibility = 'hidden'
+                    div.classList.remove('flipped');
+                    div.querySelector('.front').classList.remove('animate__animated');
+                    div.querySelector('.front').classList.remove('animate__shakeX');
+                })
+                // showBackSides();add
+                clickedEls = [];
+            }, 4500);
+        }
+        turnsUsed++;
+        turnsLeft--;
+    }
+
+    renderCardFlip(event);
 }
+
+function checkForMatchingPair() {
+    const selectedIds = clickedEls.map(function (selectedEl) {
+        return parseInt(selectedEl.id);
+    })
+    const isMatchingPair = matchingPairsArr.some(function (matchingPair) {
+        return matchingPair.toString() === selectedIds.toString() || matchingPair.reverse().toString() === selectedIds.toString();
+    })
+
+    return isMatchingPair;
+}
+
 
 
 /*----- render functions -----*/
 
-function flipCard(event) {
+function renderCardFlip(event) {
     let clickedEl = event.currentTarget;
     clickedEl.classList.add('flipped');
 }
@@ -68,5 +121,9 @@ function renderMessage() {
     } else if (winStatus === 'W') {
         messageEl.innerText = "You win!";
     }
+}
+
+function vanish() {
+    
 }
 
