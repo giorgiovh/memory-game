@@ -41,6 +41,7 @@ function init() {
     turnsLeft = turnsAllowed;
     renderMessage();
     renderStartingCards();
+    removesFlippedDisabledClasses();
 }
 
 
@@ -174,3 +175,9 @@ function renderStartingCards() {
     }) 
 }
 
+function removesFlippedDisabledClasses() {
+    cardEls.forEach(function(cardEl) {
+        cardEl.classList.remove('flipped');
+        cardEl.classList.remove('disabled');
+    }) 
+}
