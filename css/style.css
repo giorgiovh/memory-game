@@ -18,7 +18,7 @@ header {
     width: 90px;
     position: relative;
     transform-style: preserve-3d; /* f */
-    transition: all .8s linear; /* f */
+    transition: all 1s linear; /* f */
 }
 
 .front, .back {

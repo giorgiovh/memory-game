@@ -1,6 +1,14 @@
-const cardEl = document.querySelector('.card');
+// Cached Elements
 
-cardEl.addEventListener('click', handleClick);
+const cardEls = document.querySelectorAll('.card');
+
+// Event Listeners
+
+cardEls.forEach(function(cardEl) {
+    cardEl.addEventListener('click', handleClick);
+})
+
+// Functions
 
 function handleClick(event) {
     let clickedEl = event.currentTarget;
