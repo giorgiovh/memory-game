@@ -15,21 +15,37 @@ header {
 .container {
     display: grid;
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
-    perspective: 1000px;
-} /* f */
+    grid-gap: 10px;
+    min-height: 65vh;
+    perspective: 1000px; /* f */
+}
+
+.title, #message {
+    text-align: center;
+    color: white;
+}
 
 .card {
     height: 150px;
     width: 90px;
     position: relative;
     transform-style: preserve-3d; /* f */
-    transition: all 1s linear; /* f */
+    transition: all 1s linear; /* f */ /* need to make this the transition for just the card flip */
+    /* transition: .2s ease; */ /* need to make this the transition for just the expand on hover */
+    margin: auto;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
 }
 
 .front, .back {
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
     position: absolute; /* f */
 }
 
