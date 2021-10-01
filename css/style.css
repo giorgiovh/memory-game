@@ -16,7 +16,6 @@ header {
     display: grid;
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
-    /* min-height: 65vh; */
     perspective: 1000px;
 }
 
@@ -44,13 +43,11 @@ header {
 }
 
 .back {
-    background: linear-gradient(#08aeea, #2af598);
     z-index: 2;
     backface-visibility: hidden;
 }
 
 .front {
-    background: linear-gradient(#f8da61, #ff5acd);
     z-index: 1;
     transform: rotateY(180deg);
     backface-visibility: hidden;

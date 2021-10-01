@@ -94,12 +94,6 @@ function handleClick(event) {
 
     setWinStatus();
     renderMessage();
-
-    if (winStatus === 'L') {
-        cardEls.forEach(function(card) {
-            card.classList.add('disabled')
-        })
-    }
 }
 
 
