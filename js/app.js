@@ -145,11 +145,11 @@ function checkForMatchingPair() {
 /*----- check winner function -----*/
 
 function setWinStatus() {
-    if (turnsUsed > turnsAllowed) {
-        winStatus = 'L';
-    } else if (matchedPairsCount === 6) {
+    if (matchedPairsCount === 6) {
         winStatus = 'W';
-    }
+    } else if (turnsUsed === turnsAllowed) {
+        winStatus = 'L';
+    } 
 }
 
 /*----- render functions -----*/
@@ -166,11 +166,13 @@ function renderMessage() {
         messageEl.innerText = `You have ${turnsLeft} turn left. Make a move!`
     }
     
-    if (winStatus === 'L') {
-        messageEl.innerText = `You lose`;
-    } else if (winStatus === 'W') {
+    if (winStatus === 'W') {
         messageEl.innerText = `Congrats! You've won in ${turnsUsed} turns`;
     }
+
+    if (winStatus === 'L') {
+        messageEl.innerText = `You lose`;
+    } 
 }
 
 function vanish() {
