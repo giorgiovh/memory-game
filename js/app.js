@@ -36,7 +36,7 @@ function init() {
     clickedEls = [];
     winStatus = null;
     matchedPairsCount = 0;
-    turnsAllowed = 12;
+    turnsAllowed = 10;
     turnsUsed = 0;
     turnsLeft = turnsAllowed;
     renderMessage();
