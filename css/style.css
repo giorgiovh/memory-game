@@ -74,3 +74,8 @@ header {
     background-color: white;
     border-radius: 10px;
 }
+
+#reset-btn:hover {
+    color: white;
+    background-color: chocolate;
+}
