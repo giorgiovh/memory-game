@@ -13,6 +13,7 @@ const matchingPairsArr = [
 
 let clickedEls = []; //temp array that will contain each of the clicked elements id (which is their index)
 let winStatus, matchedPairsCount, turnsAllowed, turnsUsed, turnsLeft;
+
 /*----- cached element references -----*/
 
 const messageEl = document.querySelector('#message');
@@ -45,23 +46,28 @@ function init() {
     removesBackfaceVisibilityStyle();
 }
 
-
 /*----- functions -----*/
 
 function handleClick(event) {
     
     let clickedEl = event.currentTarget; // currentTarget is the element that the event listener is tied to (card El), not necessarily what you clicked on (the image itself)
 
-    if (clickedEls.includes(clickedEl)) return; // if user clicks on the same element twice, it won't run the rest of the logic
+    if (clickedEls.includes(clickedEl)) return;
 
     clickedEls.push(clickedEl);
 
     renderCardFlip(event);
 
     if (clickedEls.length === 2) {
+        cardEls.forEach(function(cardEl) {
+            cardEl.classList.add('disabled')
+        })
         if (checkForMatchingPair()) {
             setTimeout(function () {
                 vanish();
+                cardEls.forEach(function(cardEl) {
+                    cardEl.classList.remove('disabled')
+                })
                 removePointerEvents();
                 clickedEls = [];
             }, 1500);
@@ -73,7 +79,7 @@ function handleClick(event) {
 
                     addsShakeClasses(clickedEl);
                 })
-            }, 1500);
+            }, 1300);
             setTimeout(function () {
                 clickedEls.forEach(function(clickedEl) {
                     clickedEl.querySelector('.front').style.backfaceVisibility = 'hidden';
@@ -81,9 +87,12 @@ function handleClick(event) {
                     clickedEl.classList.remove('flipped');
                     
                     removesShakeClasses(clickedEl);
+                    cardEls.forEach(function(cardEl) {
+                        cardEl.classList.remove('disabled')
+                    })
                 })
                 clickedEls = [];
-            }, 2500);
+            }, 2000);
         }
         turnsUsed++;
         turnsLeft--;
@@ -98,7 +107,6 @@ function handleClick(event) {
         })
     }
 }
-
 
 function checkForMatchingPair() {
     const selectedIds = clickedEls.map(function (selectedEl) {
@@ -126,7 +134,6 @@ function setWinStatus() {
         winStatus = 'W';
     }
 }
-
 
 /*----- render functions -----*/
 
