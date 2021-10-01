@@ -59,16 +59,12 @@ function handleClick(event) {
     renderCardFlip(event);
 
     if (clickedEls.length === 2) {
-        cardEls.forEach(function(cardEl) {
-            cardEl.classList.add('disabled')
-        })
+        removeAllCardsPointerEvents(); // prevents user from flipping a 3rd card
         if (checkForMatchingPair()) {
             setTimeout(function () {
                 vanish();
-                cardEls.forEach(function(cardEl) {
-                    cardEl.classList.remove('disabled')
-                })
-                removePointerEvents();
+                enableAllCardsPointerEvents(); // adds back all pointer events
+                removeClickedElsPointerEvents(); // removed matched cards' pointer events
                 clickedEls = [];
             }, 1500);
             matchedPairsCount++;
@@ -87,9 +83,7 @@ function handleClick(event) {
                     clickedEl.classList.remove('flipped');
                     
                     removesShakeClasses(clickedEl);
-                    cardEls.forEach(function(cardEl) {
-                        cardEl.classList.remove('disabled')
-                    })
+                    enablesPointEvtsForNonMatchedCards();
                 })
                 clickedEls = [];
             }, 2000);
@@ -108,6 +102,34 @@ function handleClick(event) {
     }
 }
 
+
+
+function enablesPointEvtsForNonMatchedCards() {
+    cardEls.forEach(function (cardEl) {
+        if (cardEl.querySelector('.back').hidden === false) {
+            cardEl.classList.remove('disabled');
+        }
+    });
+}
+
+function removeAllCardsPointerEvents() {
+    cardEls.forEach(function (cardEl) {
+        cardEl.classList.add('disabled');
+    });
+}
+
+function removeClickedElsPointerEvents() {
+    clickedEls.forEach(function (clickedEl) {
+        clickedEl.classList.add('disabled');
+    });
+}
+
+function enableAllCardsPointerEvents() {
+    cardEls.forEach(function (cardEl) {
+        cardEl.classList.remove('disabled');
+    });
+}
+
 function checkForMatchingPair() {
     const selectedIds = clickedEls.map(function (selectedEl) {
         return parseInt(selectedEl.id);
@@ -119,11 +141,6 @@ function checkForMatchingPair() {
     return isMatchingPair;
 }
 
-function removePointerEvents() {
-    clickedEls.forEach(function (clickedEl) {
-        clickedEl.classList.add('disabled');
-    });
-}
 
 /*----- check winner function -----*/
 
