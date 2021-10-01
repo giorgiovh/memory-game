@@ -1,6 +1,6 @@
 # Lola's Memory Game
 
-A game that tests your memory about my dog's many poses.
+A game that tests your memory about Lola's many poses.
 
 Link to game: https://giorgiovh.github.io/memory-game/
 

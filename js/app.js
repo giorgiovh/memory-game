@@ -191,7 +191,7 @@ function renderMessage() {
     }
 
     if (winStatus === 'L') {
-        messageEl.innerText = `You lose`;
+        messageEl.innerText = `You lose. Better luck next time!`;
     } 
 }
 
