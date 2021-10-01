@@ -19,7 +19,7 @@ header {
     perspective: 1000px;
 }
 
-.card:hover {
+.card.hover-enabled:hover {
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
     -ms-transform: scale(1.1);

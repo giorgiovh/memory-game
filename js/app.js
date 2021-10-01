@@ -44,7 +44,15 @@ function init() {
     renderStartingCards();
     removesFlippedDisabledClasses();
     removesBackfaceVisibilityStyle();
+    // for when user loses
     readdEventListeners();
+    readdAllHoverEffects();
+}
+
+function readdAllHoverEffects() {
+    cardEls.forEach(function (cardEl) {
+        cardEl.classList.add('hover-enabled');
+    });
 }
 
 /*----- functions -----*/
@@ -97,9 +105,11 @@ function handleClick(event) {
     renderMessage();
 
     if (winStatus === 'L') {
+        removeAllHoverEffects();
         removeAllEventListeners();
     }
 }
+
 
 
 
@@ -146,6 +156,11 @@ function removeAllEventListeners() {
     })
 }
 
+function removeAllHoverEffects() {
+    cardEls.forEach(function (cardEl) {
+        cardEl.classList.remove('hover-enabled');
+    });
+}
 
 /*----- check winner function -----*/
 
