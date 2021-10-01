@@ -17,7 +17,6 @@ let winStatus, matchedPairsCount, turnsAllowed, turnsUsed, turnsLeft;
 /*----- cached element references -----*/
 
 const messageEl = document.querySelector('#message');
-const containerEl = document.querySelector('.container');
 const cardEls = document.querySelectorAll('.card');
 const resetBtn = document.querySelector('#reset-btn');
 
@@ -41,9 +40,11 @@ function init() {
     turnsUsed = 0;
     turnsLeft = turnsAllowed;
     renderMessage();
+    // for when reset btn is clicked:
     renderStartingCards();
     removesFlippedDisabledClasses();
     removesBackfaceVisibilityStyle();
+    readdEventListeners();
 }
 
 /*----- functions -----*/
@@ -218,3 +219,11 @@ function removesBackfaceVisibilityStyle() {
         cardEl.querySelector('.front').style.backfaceVisibility=null;
     }) 
 }
+
+function readdEventListeners() {
+    cardEls.forEach(function(cardEl) {
+        cardEl.addEventListener('click', handleClick)
+    })
+}
+
+
