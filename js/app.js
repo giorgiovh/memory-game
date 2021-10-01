@@ -94,6 +94,10 @@ function handleClick(event) {
 
     setWinStatus();
     renderMessage();
+
+    if (winStatus === 'L') {
+        removeAllEventListeners();
+    }
 }
 
 
@@ -133,6 +137,12 @@ function checkForMatchingPair() {
     })
     
     return isMatchingPair;
+}
+
+function removeAllEventListeners() {
+    cardEls.forEach(function(cardEl) {
+        cardEl.removeEventListener('click', handleClick);
+    })
 }
 
 
