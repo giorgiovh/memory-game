@@ -57,36 +57,44 @@ function readdAllHoverEffects() {
 
 /*----- functions -----*/
 
-function handleClick(event) {
-
-    myPlay();
-    
+function handleClick(event) {    
     let clickedEl = event.currentTarget; // currentTarget is the element that the event listener is tied to (card El), not necessarily what you clicked on (the image itself)
-
+    
     if (clickedEls.includes(clickedEl)) return;
-
+    
     clickedEls.push(clickedEl);
-
+    
     renderCardFlip(event);
+    
+    playCardFlipSound();
 
     if (clickedEls.length === 2) {
         removeAllCardsPointerEvents(); // prevents user from flipping a 3rd card
         if (checkForMatchingPair()) {
+
+            setTimeout(function() {
+                playMatchSound();
+            }, 700);
+
             setTimeout(function () {
                 vanish();
                 enableAllCardsPointerEvents(); // adds back all pointer events
                 removeClickedElsPointerEvents(); // removed matched cards' pointer events
                 clickedEls = [];
-            }, 1500);
+            }, 1400);
+
             matchedPairsCount++;
         } else {
             setTimeout(function () {
                 clickedEls.forEach(function(clickedEl) {
                     clickedEl.querySelector('.front').style.backfaceVisibility = 'visible';
 
+                    playNoMatchSound();
+
                     addsShakeClasses(clickedEl);
                 })
-            }, 1300);
+            }, 1000);
+
             setTimeout(function () {
                 clickedEls.forEach(function(clickedEl) {
                     clickedEl.querySelector('.front').style.backfaceVisibility = 'hidden';
@@ -243,10 +251,19 @@ function readdEventListeners() {
     })
 }
 
+/*----- sound effect functions ----- */
 
-function myPlay() {
-    const cardFlipAudio = new Audio("Card-flip-sound-effect.mp3");
+function playCardFlipSound() {
+    const cardFlipAudio = new Audio("./sounds/Card-flip-sound-effect.mp3");
     cardFlipAudio.play();
 }
 
-myPlay();
+function playMatchSound() {
+    const cardFlipAudio = new Audio("./sounds/Marimba-alert.mp3");
+    cardFlipAudio.play();
+}
+
+function playNoMatchSound() {
+    const cardFlipAudio = new Audio("./sounds/Error-sound-effect.mp3");
+    cardFlipAudio.play();
+}
