@@ -27,6 +27,10 @@ cardEls.forEach(function(cardEl) {
 })
 
 resetBtn.addEventListener('click', function() {
+    if (winStatus === 'L') {
+        readdEventListeners();
+        readdAllHoverEffects();
+    }
     init();
     renderStartingCards();
     playCardFlipSound();
@@ -46,9 +50,6 @@ function init() {
     turnsUsed = 0;
     turnsLeft = turnsAllowed;
     renderMessage();
-    // for when user loses
-    readdEventListeners();
-    readdAllHoverEffects();
 }
 
 function readdAllHoverEffects() {
