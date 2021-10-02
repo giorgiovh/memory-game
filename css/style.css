@@ -17,6 +17,8 @@ header {
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
     perspective: 1000px;
+    align-items: center;
+    justify-items: center;
 }
 
 .hover-enabled:hover {
@@ -31,7 +33,7 @@ header {
     position: relative;
     transform-style: preserve-3d;
     transition: all .25s linear;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .front, .back {

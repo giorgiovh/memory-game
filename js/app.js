@@ -26,7 +26,13 @@ cardEls.forEach(function(cardEl) {
     cardEl.addEventListener('click', handleClick);
 })
 
-resetBtn.addEventListener('click', init);
+resetBtn.addEventListener('click', function() {
+    init();
+    renderStartingCards();
+    playCardFlipSound();
+    removesFlippedDisabledClasses();
+    removesBackfaceVisibilityStyle();
+});
 
 /*----- init function -----*/
 
@@ -40,10 +46,6 @@ function init() {
     turnsUsed = 0;
     turnsLeft = turnsAllowed;
     renderMessage();
-    // for when reset btn is clicked:
-    renderStartingCards();
-    removesFlippedDisabledClasses();
-    removesBackfaceVisibilityStyle();
     // for when user loses
     readdEventListeners();
     readdAllHoverEffects();
