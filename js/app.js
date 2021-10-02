@@ -58,6 +58,8 @@ function readdAllHoverEffects() {
 /*----- functions -----*/
 
 function handleClick(event) {
+
+    myPlay();
     
     let clickedEl = event.currentTarget; // currentTarget is the element that the event listener is tied to (card El), not necessarily what you clicked on (the image itself)
 
@@ -242,3 +244,9 @@ function readdEventListeners() {
 }
 
 
+function myPlay() {
+    const cardFlipAudio = new Audio("Card-flip-sound-effect.mp3");
+    cardFlipAudio.play();
+}
+
+myPlay();
